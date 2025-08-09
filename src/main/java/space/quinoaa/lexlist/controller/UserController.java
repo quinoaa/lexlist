@@ -16,7 +16,7 @@ public class UserController extends Controller {
 
     @Override
     public void addEndpoints() {
-        ApiBuilder.get("login", this::login);
+        ApiBuilder.post("login", this::login);
         ApiBuilder.get("state", this::state);
         ApiBuilder.get("logout", this::logout);
     }
@@ -33,18 +33,19 @@ public class UserController extends Controller {
         var user = getUser(context);
 
         if(user != null){
-            context.json(new UserState(true, user.id()));
+            context.json(new UserState(true, user.id(), user.username()));
             return;
         }
 
-        context.json(new UserState(false, null));
+        context.json(new UserState(false, null, null));
     }
 
-    record UserState(boolean logged, Long id) {}
+    record UserState(boolean logged, Long id, String name) {}
 
     private void login(@NotNull Context context) {
-        var username = context.queryParam("username");
-        var password = context.queryParam("password");
+        var body = context.bodyAsClass(LoginData.class);
+        var username = body.username;
+        var password = body.password;
         if(password == null || username == null) return;
 
         var user = repo.users.getUser(username);
@@ -62,6 +63,7 @@ public class UserController extends Controller {
         }
     }
 
+    record LoginData(String username, String password) {}
 
     record LoginResult(
         boolean success
