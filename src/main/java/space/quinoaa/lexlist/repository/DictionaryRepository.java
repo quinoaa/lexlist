@@ -60,6 +60,17 @@ public class DictionaryRepository extends JDBCRepository {
         });
     }
 
+    public Dictionary getDictionary(long id){
+        return query("get_dict", res->{
+            if(!res.next()) return null;
+            return new Dictionary(
+                    res.getLong("dictid"),
+                    res.getLong("ownerid"),
+                    res.getString(res.getString("name"))
+            );
+        }, arg->arg.setLong(1, id));
+    }
+
 
 
 

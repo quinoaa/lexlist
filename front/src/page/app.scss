@@ -1,0 +1,32 @@
+.page-app {
+    display: block;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.dict-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    & > * {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: .2em 0;
+        border-bottom: solid #8484848f 1px;
+
+        img {
+            width: 2em;
+            filter: brightness(0.2);
+        }
+
+        button {
+            width: fit-content;
+        }
+    }
+
+
+}

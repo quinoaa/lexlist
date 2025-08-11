@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 public class UserRepository extends JDBCRepository {
-    private static final long TOKEN_DURATION = Long.parseLong(Config.getConfig("auth.expire_ms"));
+    public static final long TOKEN_DURATION = Long.parseLong(Config.getConfig("auth.expire_ms"));
 
     public UserRepository(Connection connection) {
         super(connection);
@@ -57,11 +57,21 @@ public class UserRepository extends JDBCRepository {
         ;
     }
 
+    public User getUserByName(String username){
+        return query("get_user_by_name", res->{
+            if(res.next()){
+                return new User(
+                        res.getLong("userid"),
+                        username,
+                        res.getString("password")
+                );
+            }
+            return null;
+        }, arg->arg.setString(1, username));
+    }
 
-
-
-    public User getUser(String token){
-        return query("get_user", res->{
+    public User getUserByToken(String token){
+        return query("get_user_by_token", res->{
             if(res.next()){
                 return new User(
                         res.getLong("userid"),

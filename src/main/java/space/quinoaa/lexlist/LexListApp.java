@@ -8,8 +8,6 @@ import space.quinoaa.lexlist.controller.UserController;
 import space.quinoaa.lexlist.repository.Repositories;
 import space.quinoaa.lexlist.schedule.ScheduledTasks;
 
-import java.sql.DriverManager;
-
 public class LexListApp {
 
     public static void main(String[] args) {
@@ -23,14 +21,15 @@ public class LexListApp {
                 ApiBuilder.path("dict", new DictController(repos));
             });
 
+
             cfg.bundledPlugins.enableCors(cors->{
                 cors.addRule(it->{
                     it.allowHost(Config.getConfig("http.cors.domain"));
+                    it.allowCredentials = true;
                 });
             });
 
             cfg.staticFiles.add("/public");
-
         }).start(Integer.parseInt(Config.getConfig("http.port")));
 
         new ScheduledTasks(repos).initialize();

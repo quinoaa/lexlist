@@ -1,28 +1,41 @@
-import { createSignal, Show } from "solid-js"
+import { createSignal, onMount, Show } from "solid-js"
 import "./login.scss"
 
 import spinner from "../media/spinner.svg"
+import { fetchUserLogin } from "../api/auth";
 
-export function PageLogin(onLogin: {onLogin: ()=>void}) {
+export function PageLogin(events: {onLogin: ()=>void}) {
     const [awaiting, setAwaiting] = createSignal(false)
+    const [error, setError] = createSignal<string|undefined>();
+
+    const [username, setUsername] = createSignal("");
+    const [password, setPassword] = createSignal("");
 
     const handleLogin = ()=>{
-        setAwaiting(true)
+        setAwaiting(true);
+        console.log(username());
+        console.log(password());
+        fetchUserLogin(username(), password()).then(res=>{
+            if(res.success) events.onLogin();
+            else setError("Invalid credentials")
+        }).catch(res=>{
+            setError("Could not log in")
+        }).finally(()=>setAwaiting(false));
     }
 
-    return (<>
-        <div id="login-form">
-            <Show when={!awaiting()}>
+    return (<div class="page-login">
+        <form class="login-form" onSubmit={()=>handleLogin()}>
+            <Show when={!awaiting()} fallback={<img src={spinner} />}>
                 <h1>Login</h1>
-                {awaiting()}
-                <input id="username"></input>
-                <input id="password"></input>
+                <input on:input={event=>setUsername(event.target.value)} placeholder="username"></input>
+                <input type="password" on:input={event=>setPassword(event.target.value)} placeholder="password"></input>
                 <button onclick={()=>handleLogin()}>Log in</button>
-                <svg>{spinner}</svg>
             </Show>
-
-        </div>
-    </>)
+            <Show when={error() !== undefined}>
+                <p class="error">{error()}</p>
+            </Show>
+        </form>
+    </div>)
 }
 
 

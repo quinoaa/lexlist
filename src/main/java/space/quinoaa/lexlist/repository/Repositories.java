@@ -8,9 +8,11 @@ import java.sql.DriverManager;
 
 public class Repositories {
     public final UserRepository users;
+    public final DictionaryRepository dict;
 
-    public Repositories(Connection conn) {
+    private Repositories(Connection conn) {
         users = new UserRepository(conn);
+        dict = new DictionaryRepository(conn);
     }
 
     @SneakyThrows
