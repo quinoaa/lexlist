@@ -1,0 +1,38 @@
+.view-texteditor {
+    display: flex;
+
+    flex-direction: column;
+
+    & > .toolbar {
+        display: flex;
+        
+
+        flex-direction: row;
+
+        & > * {
+            cursor: pointer;
+            padding: .5rem;
+        }
+    }
+}
+
+.view-text {
+    min-height: 2em;
+
+    & > div {
+        display: block;
+
+    }
+    
+    span {
+        &.b{
+            font-weight: bold;
+        }
+        &.i{
+            font-style: italic;
+        }
+        &.u{
+            text-decoration: underline;
+        }
+    }
+}

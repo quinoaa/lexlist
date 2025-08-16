@@ -43,3 +43,5 @@ bin/
 /front/build
 /front/node_modules
 /front/package-lock.json
+
+/database.db

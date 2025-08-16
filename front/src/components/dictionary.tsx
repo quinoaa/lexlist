@@ -46,7 +46,9 @@ export function DictionaryList(prop: {onSelect: (dict: Dictionary)=>void}){
                     <img src={add} onclick={addDictionary}/>
                 </div>
             } header = {
-                <h1>Dictionaries</h1>
+                <div class="bar">
+                    <h1>Dictionaries</h1>
+                </div>
             }>
                 <ItemList
                     list={list() as Dictionary[]}
@@ -104,10 +106,16 @@ export function EntryView(prop: {dict: Dictionary, entryName: string, onBack: ()
             }
         >
             <Show when={entry() !== undefined} fallback={<LoadingView />}>
-                <p>{entry()?.name}</p>
-                <Show when={editing()} fallback={<TextView data={entry()?.data as string} />}>
-                    <TextEdit init={entry()?.data as string} refEditor={setEditor} />
-                </Show>
+                <div class="view-entry">
+                    <div class="section">
+                        {entry()?.name}
+                    </div>
+                    <div class="content">
+                        <Show when={editing()} fallback={<TextView data={entry()?.data as string} />}>
+                            <TextEdit init={entry()?.data as string} refEditor={setEditor} />
+                        </Show>
+                    </div>
+                </div>
             </Show>
         </BorderPage>
     )

@@ -32,3 +32,24 @@
 
 
 }
+
+.view-entry {
+    & > .expression {
+        display: block;
+
+        margin: 2rem .5rem;
+        padding: .5rem;
+        border: black solid 1px;
+
+        &::before{
+            position: relative;
+
+            content: "Expression";
+            padding: .1rem .5rem;
+            translate: 0 -2rem;
+
+            background: white;
+            border: black solid 1px;
+        }
+    }
+}

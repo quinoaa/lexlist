@@ -4,12 +4,16 @@ import { PageLoading } from './page/Loading';
 import type { User } from './types/user';
 import { fetchUserState } from './api/auth';
 import { App } from './page/App';
+import { ViewTextEditor } from './components/text';
 
 
 
 type State = {type: "loading", description?: string}|{type: "out"}|{type: "logged", user: User}
 
 function Routes() {
+
+    return <ViewTextEditor />
+
     let [state, setState] = createSignal<State>({type: "loading"})
     
     let refresh = ()=>{
