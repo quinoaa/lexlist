@@ -1,0 +1,34 @@
+
+.dictlist {
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: .2em .2em;
+        border-bottom: solid #8484848f 1px;
+        box-sizing: border-box;
+
+        &:hover {
+            background: #80808031;
+            cursor: pointer;
+        }
+
+        input {
+            width: 100%;
+        }
+
+        img {
+            filter: brightness(0.2);
+
+            &:hover {
+                background: #80808031;
+                border-radius: 100%;
+            }
+        }
+    }
+
+
+}

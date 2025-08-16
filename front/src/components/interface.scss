@@ -1,0 +1,123 @@
+.view-navbar {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+
+    & > a{
+        display: flex;
+
+        flex-direction: column;
+        
+        & > * {
+            width: 2rem;
+        }
+    }
+}
+
+.view-borderpage {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+
+    background: #EEEEEE;
+
+    & > div {
+        width: 100%;
+        background: white;
+
+        max-width: 80ch;
+    }
+
+    & > .content {
+        overflow: scroll;
+        flex-grow: 1;
+    }
+
+    & > .header {
+        border-bottom: solid rgba(116, 116, 116, 0.501) 1px;
+
+        & > .bar {
+            display: flex;
+
+            justify-items: center;
+
+            img {
+                display: inline-block;
+                height: 2rem;
+                filter: brightness(.2);
+                padding: .5rem;
+                cursor: pointer;
+                
+                &:hover &:active {
+                    background: #76767634;
+                    border-radius: 100%;
+                }
+            }
+            
+            h1 {
+                display: inline-block;
+                
+                flex-grow: 1;
+                font-size: 2rem;
+                margin: 0;
+                padding: 0 .5rem;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    & > .footer {
+        border-top: solid rgba(116, 116, 116, 0.501) 1px;
+
+        & > .input-bar {
+            display: flex;
+            flex-direction: row;
+            gap: .5rem;
+            margin: .5rem;
+
+            input {
+                flex-grow: 1;
+                background: #EEEEEE;
+                border: 0;
+                border-bottom: solid rgb(0, 213, 255) .2rem;
+            }
+
+            img {
+                filter: brightness(.2);
+                cursor: pointer;
+
+                height: 2rem;
+                padding: .2rem;
+
+                &:hover &:active {
+                    background: #76767634;
+                    border-radius: 100%;
+                }
+            }
+        }
+    }
+}
+
+.view-itemlist {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+
+    & > div {
+        cursor: pointer;
+        padding: .5rem;
+        border-bottom: solid rgba(116, 116, 116, 0.501) 1px;
+
+        &:hover {
+            background: #77777737;
+        }
+    }
+}
